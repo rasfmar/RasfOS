@@ -44,7 +44,7 @@ __mouse:
         mov dh, cl;         
         int 10h;            set cursor pos to 0,0 (first iteration)
 
-        mov ah, 00h;
+        xor ah, ah;
         int 16h;            read key to al
 
         cmp al, 77h;
@@ -95,7 +95,7 @@ __mouse_Rclick:
 ;======= functions =======
 print:
         ;                   si is set to address of null-terminating string by this point
-        mov dl, 00h;        
+        xor dl, dl;
 
         lodsb;              loads first byte of string from si
         ;                   lodsb keeps track of the byte we're on for us
@@ -112,7 +112,7 @@ print_fixCursor:
         inc dl;             we're here because we encountered a new line char, so go to next line
 
         mov ah, 02h;
-        mov dl, 00h;
+        xor dl, dl;
         mov byte dh, dl;
         int 10h;            move there
 
@@ -121,8 +121,7 @@ print_fixCursor:
         jmp print;
 print_ret:
         mov ah, 02h;
-        mov dl, 00h;
-        mov dh, 00h;
+        xor dh, dh;
         int 10h;            move cursor back to origin
 
         ret;                return from call

@@ -6,7 +6,7 @@ The program relies on BIOS interrupt calls and a simple bootloader. The program 
 
 Here's the commented source code:
 ```asm
-;======= entrypoint =======
+;======= entrypoint/bootloader pt 1 =======
 mov ax, 9ch;                stack segment into ax
 mov ss, ax;                 
 mov sp, 4096d;              stack top offset (0x1000)
@@ -139,7 +139,7 @@ print_ret:
 msg_main db 'Welcome to RasfOS V0.1',0ah,0ah,'Please wait . . .',0ah,00h;
 msg_done db 'Done!',0ah,00h;
 
-;======= bootloader =======
+;======= bootloader pt 2 =======
 times 510-($-$$) db 0;
 dw 0xAA55;
 ```
